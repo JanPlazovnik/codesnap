@@ -1,8 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html,
 body {
-    @apply bg-stone-200 dark:bg-black;
+	@apply bg-stone-200 dark:bg-black dark:text-white;
+}
+
+.editor-group {
+	display: grid;
+	width: 100%;
+	grid-template: 1fr/1fr;
+}
+
+textarea {
+	z-index: 2;
+	border: none;
+	background: transparent;
+	resize: none;
+	-webkit-text-fill-color: transparent;
+	overflow: hidden;
+	@apply focus:outline-none;
+}
+
+.editor,
+textarea {
+	padding: 16px;
+	margin: 0;
+	grid-column: 1/1;
+	grid-row: 1/1;
+	font-family: JetBrains Mono, monospace;
+	font-size: 15px;
+	letter-spacing: 0.1px;
+	line-height: 23px;
+	white-space: pre;
+}
+
+.editor {
+	@apply bg-neutral-900 rounded-lg;
 }

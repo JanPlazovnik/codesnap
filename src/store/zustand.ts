@@ -199,6 +199,8 @@ export type LanguageSetting =
 export interface SettingsState {
 	padding: 16 | 24 | 32 | 40 | 48;
 	language: LanguageSetting;
+	setPadding: (padding: SettingsState['padding']) => void;
+	setLanguage: (language: SettingsState['language']) => void;
 }
 
 export const useSettingsState = create<SettingsState>((set) => ({

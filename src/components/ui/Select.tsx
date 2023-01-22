@@ -12,7 +12,7 @@ interface SelectProps {
 export default function Select(props: SelectProps) {
 	return (
 		<SelectPrimitive.Root value={props.value} onValueChange={props.onChange}>
-			<SelectPrimitive.Trigger asChild aria-label="Food">
+			<SelectPrimitive.Trigger asChild>
 				<Button>
 					<SelectPrimitive.Value />
 					<SelectPrimitive.Icon className="ml-2">
@@ -21,31 +21,30 @@ export default function Select(props: SelectProps) {
 				</Button>
 			</SelectPrimitive.Trigger>
 			<SelectPrimitive.Content>
-				<SelectPrimitive.ScrollUpButton className="flex items-center justify-center text-gray-700 dark:text-gray-300">
+				<SelectPrimitive.ScrollUpButton className="flex items-center justify-center text-neutral-700 dark:text-neutral-300">
 					<ChevronUpIcon />
 				</SelectPrimitive.ScrollUpButton>
-				<SelectPrimitive.Viewport className="bg-white dark:bg-gray-800 p-2 rounded-lg shadow-lg">
+				<SelectPrimitive.Viewport className="bg-white dark:bg-neutral-800 p-1 rounded-lg shadow-lg">
 					<SelectPrimitive.Group>
-						{props.options.map((f, i) => (
+						{props.options.map((option, index) => (
 							<SelectPrimitive.Item
-								disabled={f === 'Grapes'}
-								key={`${f}-${i}`}
-								value={f.toLowerCase()}
+								key={`${option}-${index}`}
+								value={option.toLowerCase()}
 								className={clsx(
-									'relative flex items-center px-8 py-2 rounded-md text-sm text-gray-700 dark:text-gray-300 font-medium focus:bg-gray-100 dark:focus:bg-gray-900',
+									'relative flex items-center px-6 py-2 rounded-md text-sm text-neutral-700 dark:text-neutral-300 font-medium hover:bg-gray-100 dark:hover:bg-neutral-900',
 									'radix-disabled:opacity-50',
 									'focus:outline-none select-none'
 								)}
 							>
-								<SelectPrimitive.ItemText>{f}</SelectPrimitive.ItemText>
-								<SelectPrimitive.ItemIndicator className="absolute left-2 inline-flex items-center">
+								<SelectPrimitive.ItemText>{option}</SelectPrimitive.ItemText>
+								<SelectPrimitive.ItemIndicator className="inline-flex absolute left-1 items-center">
 									<CheckIcon />
 								</SelectPrimitive.ItemIndicator>
 							</SelectPrimitive.Item>
 						))}
 					</SelectPrimitive.Group>
 				</SelectPrimitive.Viewport>
-				<SelectPrimitive.ScrollDownButton className="flex items-center justify-center text-gray-700 dark:text-gray-300">
+				<SelectPrimitive.ScrollDownButton className="flex items-center justify-center text-neutral-700 dark:text-neutral-300">
 					<ChevronDownIcon />
 				</SelectPrimitive.ScrollDownButton>
 			</SelectPrimitive.Content>

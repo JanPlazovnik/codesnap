@@ -8,8 +8,8 @@ const Button = React.forwardRef<HTMLButtonElement, Props>(({ children, ...props 
 		ref={ref}
 		{...props}
 		className={clsx(
-			'inline-flex select-none items-center justify-center rounded-md px-4 py-2 text-sm font-medium',
-			'bg-white text-gray-700 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-900',
+			'inline-flex select-none items-center justify-center rounded-md px-2 py-1 text-sm font-medium',
+			'bg-white text-neutral-700 hover:bg-gray-50 dark:bg-neutral-800 dark:text-gray-100 dark:hover:bg-neutral-900',
 			'hover:bg-gray-50',
 			'focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75',
 			// Register all radix states

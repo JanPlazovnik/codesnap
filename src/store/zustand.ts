@@ -1,5 +1,14 @@
 import { create } from 'zustand';
 
+const example = `/**
+* Get a random value from an array
+* @param input The input array
+* @returns A random value from the array
+*/
+export function random<T>(input: T[]): T {
+   return input[Math.floor(Math.random() * input.length)];
+}`;
+
 export type LanguageSetting =
 	| 'auto'
 	| 'none'
@@ -196,7 +205,7 @@ export type LanguageSetting =
 	| 'xquery'
 	| 'zephir';
 
-export const paddingOptions = [16, 24, 32, 40, 48] as const;
+export const paddingOptions = ['16px', '24px', '32px', '40px', '48px'] as const;
 export type PaddingSetting = typeof paddingOptions[number];
 
 export interface SettingsState {
@@ -209,9 +218,9 @@ export interface SettingsState {
 }
 
 export const useSettingsState = create<SettingsState>((set) => ({
-	padding: 16,
+	padding: '16px',
 	language: 'auto',
-	code: '',
+	code: example,
 	setPadding: (padding: SettingsState['padding']) => set({ padding }),
 	setLanguage: (language: SettingsState['language']) => set({ language }),
 	setCode: (code: SettingsState['code']) => set({ code }),

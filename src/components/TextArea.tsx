@@ -3,15 +3,6 @@ import { useSettingsState } from '../store/zustand';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-dark.css';
 
-const example = `/**
-* Get a random value from an array
-* @param input The input array
-* @returns A random value from the array
-*/
-export function random<T>(input: T[]): T {
-   return input[Math.floor(Math.random() * input.length)];
-}`;
-
 export default function TextArea() {
 	const { code, ...settings } = useSettingsState();
 	const editorRef = useRef<HTMLTextAreaElement>(null);

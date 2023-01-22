@@ -40,5 +40,5 @@ textarea {
 }
 
 .editor {
-	@apply bg-neutral-900 rounded-lg;
+	@apply bg-neutral-900/90 rounded-lg backdrop-blur-md;
 }

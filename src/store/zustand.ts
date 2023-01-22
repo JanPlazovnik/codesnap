@@ -202,13 +202,17 @@ export type PaddingSetting = typeof paddingOptions[number];
 export interface SettingsState {
 	padding: PaddingSetting;
 	language: LanguageSetting;
+	code: string;
 	setPadding: (padding: SettingsState['padding']) => void;
 	setLanguage: (language: SettingsState['language']) => void;
+	setCode: (code: SettingsState['code']) => void;
 }
 
 export const useSettingsState = create<SettingsState>((set) => ({
 	padding: 16,
 	language: 'auto',
+	code: '',
 	setPadding: (padding: SettingsState['padding']) => set({ padding }),
 	setLanguage: (language: SettingsState['language']) => set({ language }),
+	setCode: (code: SettingsState['code']) => set({ code }),
 }));

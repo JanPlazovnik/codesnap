@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 function App() {
 	const settings = useSettingsState();
 
+	// Load settings from URL
 	useEffect(() => {
 		const params = new URLSearchParams(window.location.search);
 		const language = params.get('language');
@@ -16,12 +17,12 @@ function App() {
 			settings.setLanguage(language as LanguageSetting);
 		}
 
-		if (padding && paddingOptions.includes(parseInt(padding) as PaddingSetting)) {
-			settings.setPadding(parseInt(padding) as PaddingSetting);
+		if (padding && paddingOptions.includes(padding as PaddingSetting)) {
+			settings.setPadding(padding as PaddingSetting);
 		}
 
 		if (code) {
-			settings.setCode(btoa(code));
+			settings.setCode(atob(code));
 		}
 	}, []);
 

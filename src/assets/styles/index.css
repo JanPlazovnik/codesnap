@@ -24,7 +24,6 @@ textarea {
 	overflow: hidden;
 	@apply focus:outline-none;
 	min-height: 55px;
-	height: 55px;
 }
 
 .editor,

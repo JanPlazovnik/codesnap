@@ -23,6 +23,7 @@ textarea {
 	-webkit-text-fill-color: transparent;
 	overflow: hidden;
 	@apply focus:outline-none;
+	height: 55px;
 }
 
 .editor,

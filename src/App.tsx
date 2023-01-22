@@ -1,10 +1,11 @@
 import TextArea from './components/TextArea';
 import Settings from './components/Settings';
 import { LanguageSetting, useSettingsState, PaddingSetting, paddingOptions } from './store/zustand';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
 	const settings = useSettingsState();
+	const [ready, setReady] = useState(false);
 
 	// Load settings from URL
 	useEffect(() => {
@@ -24,12 +25,18 @@ function App() {
 		if (code) {
 			settings.setCode(atob(code));
 		}
+
+		setReady(true);
 	}, []);
 
 	return (
 		<div className="grid min-h-screen place-items-center py-5 relative">
-			<TextArea />
-			<Settings />
+			{ready && (
+				<>
+					<TextArea />
+					<Settings />
+				</>
+			)}
 		</div>
 	);
 }

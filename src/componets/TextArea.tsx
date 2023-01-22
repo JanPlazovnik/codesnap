@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { useSettingsState } from '../store/zustand';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-dark.css';
@@ -13,14 +13,13 @@ export function random<T>(input: T[]): T {
 }`;
 
 export default function TextArea() {
-	const settings = useSettingsState();
-	const [code, setCode] = useState<string>(example);
+	const { code, ...settings } = useSettingsState();
 	const editorRef = useRef<HTMLTextAreaElement>(null);
 
 	const onKeyDown = (e: any) => {
 		if (e.key === 'Tab') {
 			e.preventDefault();
-			setCode(code + '    ');
+			settings.setCode(code + '    ');
 		}
 	};
 
@@ -52,7 +51,7 @@ export default function TextArea() {
 				autoCapitalize="none"
 				spellCheck={false}
 				value={code}
-				onChange={(e) => setCode(e.target.value)}
+				onChange={(e) => settings.setCode(e.target.value)}
 				onKeyDown={onKeyDown}
 				onInput={onInput}
 				ref={editorRef}

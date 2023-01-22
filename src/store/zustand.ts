@@ -196,8 +196,11 @@ export type LanguageSetting =
 	| 'xquery'
 	| 'zephir';
 
+export const paddingOptions = [16, 24, 32, 40, 48] as const;
+export type PaddingSetting = typeof paddingOptions[number];
+
 export interface SettingsState {
-	padding: 16 | 24 | 32 | 40 | 48;
+	padding: PaddingSetting;
 	language: LanguageSetting;
 	setPadding: (padding: SettingsState['padding']) => void;
 	setLanguage: (language: SettingsState['language']) => void;

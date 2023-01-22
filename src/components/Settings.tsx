@@ -8,34 +8,39 @@ import {
 	gradients,
 	GradientSetting,
 } from '../store/zustand';
-import { useEffect } from 'react';
+import { useCallback } from 'react';
+import { toPng } from 'html-to-image';
+import Button from './ui/shared/Button';
+import React from 'react';
 
-export default function Settings() {
+const Settings = React.forwardRef((_, ref: any) => {
 	const settings = useSettingsState();
 
-	// Update URL with settings
-	// useEffect(() => {
-	// 	const params = new URLSearchParams(window.location.search);
+	const onButtonClick = useCallback(() => {
+		if (ref.current === null) {
+			return;
+		}
 
-	// 	if (settings.language) {
-	// 		params.set('language', settings.language);
-	// 	}
-
-	// 	if (settings.padding) {
-	// 		params.set('padding', settings.padding);
-	// 	}
-
-	// 	window.history.replaceState({}, '', `${window.location.pathname}?${params}`);
-	// }, [settings.language, settings.padding]);
+		toPng(ref.current, { cacheBust: true })
+			.then((dataUrl) => {
+				const link = document.createElement('a');
+				link.download = `codesnap-${+new Date()}-${settings.language}.png`;
+				link.href = dataUrl;
+				link.click();
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, [ref]);
 
 	return (
-		<div className="flex flex-row gap-4 fixed bottom-20">
+		<div className="flex flex-row gap-4 fixed bottom-20 bg-neutral-300 dark:bg-neutral-900/70 backdrop-blur-md p-2 rounded-lg z-10">
 			<div className="flex flex-col gap-1">
-				<span className="text-sm">Theme</span>
 				<div className="flex flex-row items-center justify-center h-full gap-1">
-					{gradients.map((gradient: string) => (
+					{gradients.map((gradient: string, index: number) => (
 						<div
-							className="w-5 h-5 rounded-full bg-white cursor-pointer"
+							key={index}
+							className="w-5 h-5 rounded-full bg-white cursor-pointer border-2 border-neutral-500"
 							style={{ background: gradient }}
 							onClick={() => settings.setGradient(gradient as GradientSetting)}
 						/>
@@ -44,7 +49,6 @@ export default function Settings() {
 			</div>
 
 			<div className="flex flex-col gap-1">
-				<span className="text-sm">Padding</span>
 				<Select
 					value={settings.padding}
 					options={paddingOptions as unknown as string[]}
@@ -53,13 +57,18 @@ export default function Settings() {
 			</div>
 
 			<div className="flex flex-col gap-1">
-				<span className="text-sm">Language</span>
 				<Select
 					value={settings.language}
 					options={['auto', 'none', ...hljs.listLanguages()]}
 					onChange={(option: string) => settings.setLanguage(option as LanguageSetting)}
 				/>
 			</div>
+
+			<div className="flex flex-col justify-end">
+				<Button onClick={onButtonClick}>Save</Button>
+			</div>
 		</div>
 	);
-}
+});
+
+export default Settings;

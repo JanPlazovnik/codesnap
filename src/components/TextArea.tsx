@@ -1,9 +1,10 @@
-import { useMemo, useRef } from 'react';
+import { ComponentProps, FC, useCallback, useMemo, useRef } from 'react';
 import { useSettingsState } from '../store/zustand';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-dark.css';
+import React from 'react';
 
-export default function TextArea() {
+const TextArea = React.forwardRef((props, ref) => {
 	const { code, ...settings } = useSettingsState();
 	const editorRef = useRef<HTMLTextAreaElement>(null);
 
@@ -34,6 +35,7 @@ export default function TextArea() {
 		<div
 			className={`editor-group max-w-[960px]`}
 			style={{ padding: settings.padding, background: settings.gradient }}
+			ref={ref as React.RefObject<HTMLDivElement>}
 		>
 			<textarea
 				tabIndex={-1}
@@ -50,4 +52,6 @@ export default function TextArea() {
 			<div className="editor hljs" dangerouslySetInnerHTML={{ __html: highlighted }}></div>
 		</div>
 	);
-}
+});
+
+export default TextArea;

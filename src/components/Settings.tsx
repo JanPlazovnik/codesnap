@@ -1,4 +1,5 @@
 import hljs from 'highlight.js';
+import Select from './ui/Select';
 import {
 	useSettingsState,
 	LanguageSetting,
@@ -10,39 +11,23 @@ export default function Settings() {
 	const settings = useSettingsState();
 
 	return (
-		<div className="flex flex-row gap-5 fixed bottom-10 p-4 border-2 rounded-lg border-solid">
-			<div className="flex gap-2">
-				<label htmlFor="language">Language</label>
-				<select
-					id="language"
-					value={settings.language}
-					onChange={(e) => settings.setLanguage(e.target.value as LanguageSetting)}
-				>
-					<option value="none">None</option>
-					<option value="auto">Auto</option>
-					{hljs.listLanguages().map((language: string) => (
-						<option key={language} value={language}>
-							{language}
-						</option>
-					))}
-				</select>
+		<div className="flex flex-row gap-4 fixed bottom-20">
+			<div className="flex flex-col gap-2">
+				<span>Padding</span>
+				<Select
+					value={settings.padding}
+					options={paddingOptions as unknown as string[]}
+					onChange={(option: string) => settings.setPadding(option as PaddingSetting)}
+				/>
 			</div>
 
-			<div className="flex gap-2">
-				<label htmlFor="padding">Padding</label>
-				<select
-					id="padding"
-					value={settings.padding}
-					onChange={(e) =>
-						settings.setPadding(parseInt(e.target.value) as PaddingSetting)
-					}
-				>
-					{paddingOptions.map((padding: number) => (
-						<option key={padding} value={padding}>
-							{padding}px
-						</option>
-					))}
-				</select>
+			<div className="flex flex-col gap-2">
+				<span>Language</span>
+				<Select
+					value={settings.language}
+					options={['auto', 'none', ...hljs.listLanguages()]}
+					onChange={(option: string) => settings.setLanguage(option as LanguageSetting)}
+				/>
 			</div>
 		</div>
 	);

@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useMemo, useRef } from 'react';
 import { useSettingsState } from '../store/zustand';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-dark.css';
@@ -24,7 +24,7 @@ export default function TextArea() {
 		try {
 			if (settings.language === 'none') return code;
 			if (settings.language === 'auto') return hljs.highlightAuto(code).value;
-			return hljs.highlight(settings.language, code).value;
+			return hljs.highlight(code, { language: settings.language }).value;
 		} catch (error) {
 			return code;
 		}

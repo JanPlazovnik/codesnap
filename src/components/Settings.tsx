@@ -34,7 +34,7 @@ const Settings = React.forwardRef((_, ref: any) => {
 	}, [ref]);
 
 	return (
-		<div className="flex flex-row gap-4 fixed bottom-20 bg-neutral-300 dark:bg-neutral-900/70 backdrop-blur-md p-2 rounded-lg z-10">
+		<div className="flex flex-row gap-4 fixed bottom-20 bg-neutral-300 dark:bg-neutral-900/70 p-2 rounded-lg z-10">
 			<div className="flex flex-col gap-1">
 				<div className="flex flex-row items-center justify-center h-full gap-1">
 					{gradients.map((gradient: string, index: number) => (

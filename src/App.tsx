@@ -1,5 +1,5 @@
-import TextArea from './componets/TextArea';
-import Settings from './componets/Settings';
+import TextArea from './components/TextArea';
+import Settings from './components/Settings';
 import { LanguageSetting, useSettingsState, PaddingSetting, paddingOptions } from './store/zustand';
 import { useEffect } from 'react';
 

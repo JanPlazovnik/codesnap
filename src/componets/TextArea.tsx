@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useSettingsState } from '../store/zustand';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-dark.css';

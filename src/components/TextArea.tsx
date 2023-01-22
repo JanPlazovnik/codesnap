@@ -32,8 +32,8 @@ export default function TextArea() {
 
 	return (
 		<div
-			className={`editor-group max-w-[960px] bg-blue-400`}
-			style={{ padding: settings.padding }}
+			className={`editor-group max-w-[960px]`}
+			style={{ padding: settings.padding, background: settings.gradient }}
 		>
 			<textarea
 				tabIndex={-1}

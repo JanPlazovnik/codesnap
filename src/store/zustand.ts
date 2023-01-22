@@ -208,20 +208,33 @@ export type LanguageSetting =
 export const paddingOptions = ['16px', '24px', '32px', '40px', '48px'] as const;
 export type PaddingSetting = typeof paddingOptions[number];
 
+export const gradients = [
+	'linear-gradient(to right, #4a00e0, #8e2de2)',
+	'linear-gradient(to right, #1f4037, #99f2c8)',
+	'linear-gradient(to right, #f12711, #f5af19)',
+	'linear-gradient(to right, #654ea3, #eaafc8)',
+	'linear-gradient(to right, #7EE8FA, #EEC0C6)',
+] as const;
+export type GradientSetting = typeof gradients[number];
+
 export interface SettingsState {
 	padding: PaddingSetting;
 	language: LanguageSetting;
+	gradient: GradientSetting;
 	code: string;
 	setPadding: (padding: SettingsState['padding']) => void;
 	setLanguage: (language: SettingsState['language']) => void;
 	setCode: (code: SettingsState['code']) => void;
+	setGradient: (gradient: SettingsState['gradient']) => void;
 }
 
 export const useSettingsState = create<SettingsState>((set) => ({
 	padding: '16px',
 	language: 'auto',
+	gradient: gradients[0],
 	code: example,
 	setPadding: (padding: SettingsState['padding']) => set({ padding }),
 	setLanguage: (language: SettingsState['language']) => set({ language }),
 	setCode: (code: SettingsState['code']) => set({ code }),
+	setGradient: (gradient: SettingsState['gradient']) => set({ gradient }),
 }));

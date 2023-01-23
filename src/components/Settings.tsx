@@ -26,7 +26,7 @@ const Settings = React.forwardRef((_, ref: any) => {
 
 			// Create a link to download the image
 			const link = document.createElement('a');
-			link.download = `codesnap-${+new Date()}-${settings.language}.png`;
+			link.download = `codesnap-${+new Date()}.png`;
 			link.href = imageUrl;
 			link.click();
 		} catch (e: any) {

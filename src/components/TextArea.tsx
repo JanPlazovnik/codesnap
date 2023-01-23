@@ -16,7 +16,9 @@ const TextArea = React.forwardRef((_, ref) => {
 	};
 
 	const onInput = () => {
-		const editor = editorRef.current!;
+		const editor = editorRef.current;
+		if (!editor) return;
+
 		editor.style.height = '0px';
 		editor.style.height = editor.scrollHeight + 'px';
 	};

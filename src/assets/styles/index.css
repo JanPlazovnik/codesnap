@@ -11,8 +11,9 @@ body {
 
 .editor-group {
 	display: grid;
-	width: 100%;
 	grid-template: 1fr/1fr;
+	min-width: 430px;
+	max-width: 960px;
 }
 
 textarea {

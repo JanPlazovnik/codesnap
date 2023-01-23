@@ -16,21 +16,22 @@ import React from 'react';
 const Settings = React.forwardRef((_, ref: any) => {
 	const settings = useSettingsState();
 
-	const onButtonClick = useCallback(() => {
-		if (ref.current === null) {
-			return;
-		}
+	const takeScreenshot = useCallback(async () => {
+		try {
+			// Make sure the ref is set and the div exists
+			if (!ref || !ref.current) return;
 
-		toPng(ref.current, { cacheBust: true })
-			.then((dataUrl) => {
-				const link = document.createElement('a');
-				link.download = `codesnap-${+new Date()}-${settings.language}.png`;
-				link.href = dataUrl;
-				link.click();
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+			// Convert the div to a PNG
+			const imageUrl = await toPng(ref.current, { cacheBust: true });
+
+			// Create a link to download the image
+			const link = document.createElement('a');
+			link.download = `codesnap-${+new Date()}-${settings.language}.png`;
+			link.href = imageUrl;
+			link.click();
+		} catch (e: any) {
+			console.error(e);
+		}
 	}, [ref]);
 
 	return (
@@ -65,7 +66,9 @@ const Settings = React.forwardRef((_, ref: any) => {
 			</div>
 
 			<div className="flex flex-col justify-end">
-				<Button onClick={onButtonClick}>Save</Button>
+				<Button onClick={takeScreenshot}>
+					<span className="font-semibold">Export</span>
+				</Button>
 			</div>
 		</div>
 	);

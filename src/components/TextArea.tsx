@@ -1,10 +1,10 @@
-import { ComponentProps, FC, useCallback, useMemo, useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { useSettingsState } from '../store/zustand';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-dark.css';
 import React from 'react';
 
-const TextArea = React.forwardRef((props, ref) => {
+const TextArea = React.forwardRef((_, ref) => {
 	const { code, ...settings } = useSettingsState();
 	const editorRef = useRef<HTMLTextAreaElement>(null);
 
@@ -24,7 +24,8 @@ const TextArea = React.forwardRef((props, ref) => {
 	const highlighted = useMemo(() => {
 		try {
 			if (settings.language === 'none') return code;
-			if (settings.language === 'auto') return hljs.highlightAuto(code).value;
+			if (settings.language === 'auto')
+				return hljs.highlightAuto(code).value;
 			return hljs.highlight(code, { language: settings.language }).value;
 		} catch (error) {
 			return code;
@@ -33,7 +34,7 @@ const TextArea = React.forwardRef((props, ref) => {
 
 	return (
 		<div
-			className={`editor-group max-w-[960px]`}
+			className={`editor-group font-semibold`}
 			style={{ padding: settings.padding, background: settings.gradient }}
 			ref={ref as React.RefObject<HTMLDivElement>}
 		>
@@ -49,7 +50,10 @@ const TextArea = React.forwardRef((props, ref) => {
 				onInput={onInput}
 				ref={editorRef}
 			/>
-			<div className="editor hljs" dangerouslySetInnerHTML={{ __html: highlighted }}></div>
+			<div
+				className="editor hljs"
+				dangerouslySetInnerHTML={{ __html: highlighted }}
+			></div>
 		</div>
 	);
 });

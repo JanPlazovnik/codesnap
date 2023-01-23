@@ -1,6 +1,11 @@
 import TextArea from './components/TextArea';
 import Settings from './components/Settings';
-import { LanguageSetting, useSettingsState, PaddingSetting, paddingOptions } from './store/zustand';
+import {
+	LanguageSetting,
+	useSettingsState,
+	PaddingSetting,
+	paddingOptions,
+} from './store/zustand';
 import { useEffect, useRef, useState } from 'react';
 
 function App() {
@@ -31,7 +36,7 @@ function App() {
 	}, []);
 
 	return (
-		<div className="grid min-h-screen place-items-center py-5 relative">
+		<div className="grid min-h-screen place-items-center relative">
 			{ready && (
 				<>
 					<TextArea ref={ref} />

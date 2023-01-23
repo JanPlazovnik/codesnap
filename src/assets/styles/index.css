@@ -43,3 +43,7 @@ textarea {
 .editor {
 	@apply bg-neutral-900/90 rounded-lg backdrop-blur-md;
 }
+
+.settings {
+	@apply flex flex-row gap-4 items-center fixed bottom-20 bg-neutral-300 dark:bg-neutral-900/70 p-2 z-10 rounded-lg;
+}

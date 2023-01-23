@@ -35,27 +35,34 @@ const TextArea = React.forwardRef((_, ref) => {
 	}, [code, settings.language]);
 
 	return (
-		<div
-			className={`editor-group font-semibold`}
-			style={{ padding: settings.padding, background: settings.gradient }}
-			ref={ref as React.RefObject<HTMLDivElement>}
-		>
-			<textarea
-				tabIndex={-1}
-				autoComplete="off"
-				autoCorrect="off"
-				autoCapitalize="none"
-				spellCheck={false}
-				value={code}
-				onChange={(e) => settings.setCode(e.target.value)}
-				onKeyDown={onKeyDown}
-				onInput={onInput}
-				ref={editorRef}
-			/>
+		<div className="editor-wrapper">
+			<div className="editor-resize-blob left-0 translate-x-[-50%] translate-y-[-50%]"></div>
+			<div className="editor-resize-blob right-0 translate-x-[50%] translate-y-[-50%]"></div>
 			<div
-				className="editor hljs"
-				dangerouslySetInnerHTML={{ __html: highlighted }}
-			></div>
+				className={`editor-group font-semibold`}
+				style={{
+					padding: settings.padding,
+					background: settings.gradient,
+				}}
+				ref={ref as React.RefObject<HTMLDivElement>}
+			>
+				<textarea
+					tabIndex={-1}
+					autoComplete="off"
+					autoCorrect="off"
+					autoCapitalize="none"
+					spellCheck={false}
+					value={code}
+					onChange={(e) => settings.setCode(e.target.value)}
+					onKeyDown={onKeyDown}
+					onInput={onInput}
+					ref={editorRef}
+				/>
+				<div
+					className="editor hljs"
+					dangerouslySetInnerHTML={{ __html: highlighted }}
+				></div>
+			</div>
 		</div>
 	);
 });

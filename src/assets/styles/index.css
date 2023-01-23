@@ -9,6 +9,32 @@ body {
 	@apply bg-stone-200 dark:bg-black dark:text-white;
 }
 
+.editor-wrapper {
+	position: relative;
+}
+
+.editor-resize-blob {
+	position: absolute;
+	z-index: 2;
+	top: 50%;
+	width: 25px;
+	height: 25px;
+	cursor: col-resize;
+}
+
+.editor-resize-blob::after {
+	content: '';
+	width: 7px;
+	height: 7px;
+	background: red;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 50%;
+	@apply bg-neutral-400 dark:bg-white;
+}
+
 .editor-group {
 	display: grid;
 	grid-template: 1fr/1fr;
